@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Andre & Trinita</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cinzel:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+
+        body {
+            background: #000;
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Cover Section */
+        .cover {
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 51, 102, 0.2) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('images/wedding.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cover h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 3px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #fff, #ffd700, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7)); }
+        }
+
+        .cover h2 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .cover .date {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            padding: 15px 30px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .open-btn {
+            background: linear-gradient(45deg, #8B0000, #660000);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .open-btn:hover::before {
+            left: 100%;
+        }
+
+        .open-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.5);
+            background: linear-gradient(45deg, #660000, #8B0000);
+        }
+
+        /* Content Sections dengan Background Fullscreen */
+        .section {
+            min-height: 100vh;
+            position: relative;
+            display: none;
+            padding: 50px 25px;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
+        }
+
+        .section.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: sectionFadeIn 1.5s ease-out;
+        }
+
+        @keyframes sectionFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* BACKGROUND FULLSCREEN DENGAN TEMA KRISTEN BATAK MEWAH */
+        #opening {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 80% 20%, rgba(0, 51, 102, 0.1) 0%, transparent 70%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #couple {
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 70% 70%, rgba(0, 51, 102, 0.1) 0%, transparent 70%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #lovestory {
+            background: 
+                radial-gradient(circle at 40% 60%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 60% 40%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #schedule {
+            background: 
+                radial-gradient(circle at 25% 25%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #location {
+            background: 
+                radial-gradient(circle at 60% 30%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #qrsection {
+            background: 
+                radial-gradient(circle at 70% 60%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 30% 40%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #rsvp {
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        #closing {
+            background: 
+                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(0, 51, 102, 0.1) 0%, transparent 50%),
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
+                url('images/image.png') center/cover;
+        }
+
+        .content-wrapper {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 50px 35px;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 360px;
+            margin: 20px;
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            animation: contentFloat 2s ease-out;
+        }
+
+        @keyframes contentFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(45deg, #8B0000, #ffd700, #003366);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+        }
+
+        .wedding-verse {
+            font-size: 1.3em;
+            color: #ffd700;
+            margin: 25px 0;
+            font-style: italic;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            line-height: 1.6;
+            animation: verseGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes verseGlow {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(139, 0, 0, 0.5),
+                           0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            50% { 
+                text-shadow: 0 0 15px rgba(139, 0, 0, 0.7),
+                           0 0 30px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        /* Couple Photos Styles */
+        .couple-photo {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            margin: 25px auto;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.6),
+                0 0 0 4px rgba(139, 0, 0, 0.3),
+                0 0 0 8px rgba(255, 215, 0, 0.2);
+            transition: all 0.6s ease;
+            animation: photoOrbit 8s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes photoOrbit {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                box-shadow: 
+                    0 20px 40px rgba(0, 0, 0, 0.6),
+                    0 0 0 4px rgba(139, 0, 0, 0.3),
+                    0 0 0 8px rgba(255, 215, 0, 0.2);
+            }
+            33% { 
+                transform: translateY(-10px) rotate(2deg);
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.7),
+                    0 0 0 4px rgba(139, 0, 0, 0.4),
+                    0 0 0 8px rgba(255, 215, 0, 0.3);
+            }
+            66% { 
+                transform: translateY(5px) rotate(-1deg);
+                box-shadow: 
+                    0 15px 35px rgba(0, 0, 0, 0.5),
+                    0 0 0 4px rgba(139, 0, 0, 0.2),
+                    0 0 0 8px rgba(255, 215, 0, 0.1);
+            }
+        }
+
+        .couple-photo:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.8),
+                0 0 0 6px rgba(139, 0, 0, 0.5),
+                0 0 0 12px rgba(255, 215, 0, 0.3),
+                0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 35px 0;
+        }
+
+        .gallery-item {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.5),
+                0 0 0 2px rgba(255, 215, 0, 0.3);
+            transition: all 0.5s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #8B0000, #003366) padding-box,
+                        linear-gradient(45deg, #ffd700, transparent) border-box;
+            animation: galleryFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes galleryFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.15) rotate(3deg);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.7),
+                0 0 0 3px rgba(255, 215, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .romantic-photo {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 25px;
+            margin: 25px auto;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.7),
+                0 0 0 3px rgba(139, 0, 0, 0.4),
+                0 0 0 6px rgba(255, 215, 0, 0.2);
+            transition: all 0.5s ease;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #8B0000, #003366) padding-box,
+                        linear-gradient(45deg, #ffd700, transparent) border-box;
+            animation: romanticGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes romanticGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.7),
+                    0 0 0 3px rgba(139, 0, 0, 0.4),
+                    0 0 0 6px rgba(255, 215, 0, 0.2);
+            }
+            50% { 
+                box-shadow: 
+                    0 30px 60px rgba(0, 0, 0, 0.8),
+                    0 0 0 4px rgba(139, 0, 0, 0.6),
+                    0 0 0 8px rgba(255, 215, 0, 0.3),
+                    0 0 25px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        .romantic-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .bride-groom {
+            background: linear-gradient(135deg, 
+                rgba(139, 0, 0, 0.2), 
+                rgba(0, 51, 102, 0.2));
+            padding: 35px 25px;
+            margin: 25px 0;
+            border-radius: 25px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #ffd700;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bride-groom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .name {
+            font-size: 2em;
+            color: #ffd700;
+            margin: 15px 0;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 15px rgba(139, 0, 0, 0.7);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+
+        .parents {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navigation */
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #8B0000, #660000);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.4s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #660000, #8B0000);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.5);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .nav-btn:disabled::before {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #8B0000, #ffd700, #003366);
+            z-index: 1000;
+            transition: width 0.6s ease;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatRandom 15s infinite ease-in-out;
+        }
+
+        @keyframes floatRandom {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.1;
+            }
+            25% { 
+                transform: translate(20px, -30px) rotate(90deg) scale(1.1);
+                opacity: 0.2;
+            }
+            50% { 
+                transform: translate(-15px, 20px) rotate(180deg) scale(0.9);
+                opacity: 0.05;
+            }
+            75% { 
+                transform: translate(25px, 15px) rotate(270deg) scale(1.05);
+                opacity: 0.15;
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.2em;
+            color: #ffd700;
+            margin-bottom: 35px;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.7);
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            animation: lineExtend 1.5s ease-out 0.5s both;
+        }
+
+        @keyframes lineExtend {
+            from { width: 0; opacity: 0; }
+            to { width: 80px; opacity: 1; }
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 35px 0;
+        }
+
+        .countdown-item {
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffd700;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 80px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            animation: countdownShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes countdownShimmer {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(255, 215, 0, 0.3);
+            font-size: 1.5em;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.6),
+                0 0 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Text Content Styling */
+        .content-text {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin: 25px 0;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .verse {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            border-left: 4px solid #ffd700;
+            line-height: 1.8;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            text-align: left;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .verse::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 3em;
+            color: rgba(255, 215, 0, 0.3);
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Schedule Items */
+        .schedule-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 20px;
+            border-left: 5px solid #ffd700;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .schedule-item:hover::before {
+            transform: translateX(100%);
+        }
+
+        .schedule-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 45px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 215, 0, 0.2);
+        }
+
+        .schedule-time {
+            font-size: 1.5em;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+        }
+
+        .schedule-location {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Dress Code */
+        .dress-code {
+            background: linear-gradient(135deg, 
+                rgba(139, 0, 0, 0.2), 
+                rgba(0, 51, 102, 0.2));
+            padding: 25px;
+            border-radius: 20px;
+            margin: 30px 0;
+            color: #ffd700;
+            font-weight: 600;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(15px);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #8B0000, #660000);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.5);
+            background: linear-gradient(45deg, #660000, #8B0000);
+        }
+
+        /* Guest Book */
+        .guest-entry {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            border-left: 3px solid #ffd700;
+            backdrop-filter: blur(10px);
+            text-align: left;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .guest-name {
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .guest-message {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        /* Bank Info */
+        .bank-info {
+            margin-top: 30px;
+        }
+
+        .bank-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .bank-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Map Container */
+        .map-container {
+            margin: 25px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+
+        /* Love Story */
+        .love-story {
+            text-align: left;
+            margin: 25px 0;
+        }
+
+        .story-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border-left: 3px solid #ffd700;
+        }
+
+        .story-year {
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* QR Code */
+        .qrcode-container {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Section Transition Animation */
+        .section-transition {
+            animation: sectionChange 1.5s ease-in-out;
+        }
+
+        @keyframes sectionChange {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .content-wrapper {
+                margin: 15px;
+                padding: 30px 20px;
+                max-width: 320px;
+            }
+            
+            .cover h1 {
+                font-size: 2.8em;
+            }
+            
+            .cover h2 {
+                font-size: 1.5em;
+            }
+            
+            .navigation {
+                padding: 12px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+            
+            .couple-photo {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .gallery-item {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <div class="container">
+        <!-- Cover Section -->
+        <div class="cover" id="cover">
+            <div class="cover-content">
+                <h1>Andre & Trinita</h1>
+                <h2>Pernikahan Kristen</h2>
+                <div class="date">24 . 08 . 2024</div>
+                
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Hari</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Jam</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Menit</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Detik</div>
+                    </div>
+                </div>
+                
+                <button class="open-btn" onclick="openInvitation()">Buka Undangan</button>
+            </div>
+        </div>
+
+        <!-- Opening Section -->
+        <div class="section" id="opening">
+            <div class="content-wrapper">
+                <div class="wedding-verse">"Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia."</div>
+                <div style="font-size: 0.9em; margin-bottom: 25px; color: rgba(255, 255, 255, 0.7);">Matius 19:6</div>
+                
+                <p class="content-text">
+                    Atas berkat dan anugerah Tuhan Yesus Kristus,<br>
+                    dengan penuh syukur dan sukacita,<br>
+                    kami mengundang Anda untuk menjadi saksi<br>
+                    dalam pernikahan kami.
+                </p>
+
+                <div class="photo-gallery">
+                    <img src="images/andre.jpg" alt="Couple 1" class="gallery-item">
+                    <img src="images/nita3.jpg" alt="Couple 2" class="gallery-item">
+                </div>
+            </div>
+        </div>
+
+        <!-- Couple Section -->
+        <div class="section" id="couple">
+            <div class="content-wrapper">
+                <h2 class="section-title">Mempelai</h2>
+                
+                <img src="images/wedding.png" alt="Andre & Trinita" class="couple-photo">
+                
+                <div class="bride-groom">
+                    <div class="name">Andre Blyhard Gultom</div>
+                    <div class="parents">Putra dari Bapak Ahmad Riyadi & Ibu Sari Dewi</div>
+                    
+                    <div style="font-size: 2.5em; margin: 20px 0; color: #ffd700;">&</div>
+                    
+                    <div class="name">Trinita Rumapea</div>
+                    <div class="parents">Putri dari Bapak Handoko Wijaya & Ibu Linda Permata</div>
+                </div>
+
+                <div class="photo-gallery">
+                    <img src="images/andre.jpg" alt="Groom" class="gallery-item">
+                    <img src="images/nita3.jpg" alt="Bride" class="gallery-item">
+                </div>
+            </div>
+        </div>
+
+        <!-- Love Story Section -->
+        <div class="section" id="lovestory">
+            <div class="content-wrapper">
+                <h2 class="section-title">Our Love Story</h2>
+                
+                <img src="images/image.png" alt="Love Story" class="romantic-photo">
+                
+                <div class="love-story">
+                    <div class="story-item">
+                        <div class="story-year">🎯 2019 - Pertemuan Pertama</div>
+                        <p>kita bertemu dikampus nomensen tepat dibawah pohon </p>
+                    </div>
+                    
+                    <div class="story-item">
+                        <div class="story-year">💕 2020 - Mulai Berkomitmen</div>
+                        <p>Setahun mengenal satu sama lain, kami memutuskan untuk menjalin hubungan yang serius dengan restu dari kedua keluarga dan doa di gereja.</p>
+                    </div>
+                    
+                    <div class="story-item">
+                        <div class="story-year">💍 2023 - Lamaran</div>
+                        <p>Di bawah berkat Tuhan, dengan hati berdebar, kami menyatakan komitmen untuk melanjutkan perjalanan hidup bersama dalam ikatan pernikahan.</p>
+                    </div>
+                </div>
+
+                <div class="photo-gallery">
+                    <img src="images/andre.jpg" alt="Memory 1" class="gallery-item">
+                    <img src="images/nita3.jpg" alt="Memory 2" class="gallery-item">
+                    <img src="images/wedding.png" alt="Memory 3" class="gallery-item">
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="section" id="schedule">
+            <div class="content-wrapper">
+                <h2 class="section-title">Jadwal Acara</h2>
+                
+                <img src="images/image.png" alt="Wedding Venue" class="romantic-photo">
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">⛪ 08.00 - 10.00 WIB</div>
+                    <div style="font-weight: bold; margin: 10px 0; font-size: 1.2em;">Kebaktian Pernikahan</div>
+                    <div class="schedule-location">Gereja HKBP Resort Sopo Godang</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="schedule-time">🎉 11.00 - 14.00 WIB</div>
+                    <div style="font-weight: bold; margin: 10px 0; font-size: 1.2em;">Resepsi Pernikahan</div>
+                    <div class="schedule-location">Sopo Godang HKBP</div>
+                </div>
+                
+                <div class="dress-code">
+                    <strong>Kode Busana:</strong> Batak Elegant / Formal
+                </div>
+
+                <div class="photo-gallery">
+                    <img src="images/image.png" alt="Venue 1" class="gallery-item">
+                    <img src="images/wedding.png" alt="Venue 2" class="gallery-item">
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Section -->
+        <div class="section" id="location">
+            <div class="content-wrapper">
+                <h2 class="section-title">Lokasi Acara</h2>
+                
+                <img src="images/image.png" alt="Location" class="romantic-photo">
+                
+                <div class="map-section">
+                    <p class="content-text">
+                        Acara pernikahan kami akan diselenggarakan di:<br>
+                        <strong>Gereja HKBP Resort Sopo Godang</strong><br>
+                        Jl. Gereja No. 123, Kota Anda
+                    </p>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.5300877742134!2d99.05844727472945!3d2.9502873970259325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303184575dcc0cbf%3A0xf2adc91f1ca650d6!2sSopo%20Godang%20HKBP!5e0!3m2!1sid!2sid!4v1760610616989!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                    <div style="margin-top: 25px;">
+                        <a href="https://maps.google.com/?q=Sopo+Godang+HKBP" target="_blank" class="nav-btn" style="text-decoration: none; display: inline-block;">
+                            <i class="fas fa-directions"></i> Buka di Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="section" id="qrsection">
+            <div class="content-wrapper">
+                <h2 class="section-title">Amplop Digital</h2>
+                
+                <img src="images/andreqr.jpg" alt="Gift" class="romantic-photo">
+                
+                <p class="content-text">
+                    Kehadiran dan doa Anda adalah hadiah terindah bagi kami.<br>
+                    Namun jika ingin memberikan tanda kasih, scan QR code berikut:
+                </p>
+                
+                <div class="qrcode-container">
+                    <canvas id="qrcode"></canvas>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        Scan QR code di atas untuk transfer hadiah
+                    </p>
+                </div>
+
+                <div class="bank-info">
+                    <h4 style="color: #ffd700; margin-bottom: 15px;">📋 Informasi Transfer Manual:</h4>
+                    
+                    <div class="bank-details">
+                        <div class="bank-card">
+                            <strong>Bank BCA</strong><br>
+                            123-456-7890<br>
+                            a.n. Andre Pratama
+                        </div>
+                        
+                        <div class="bank-card">
+                            <strong>Bank Mandiri</strong><br>
+                            098-765-4321<br>
+                            a.n. Trinita Sari
+                        </div>
+                    </div>
+                </div>
+
+                <div class="photo-gallery">
+                    <img src="images/andre.jpg" alt="Celebration 1" class="gallery-item">
+                    <img src="images/nita3.jpg" alt="Celebration 2" class="gallery-item">
+                </div>
+            </div>
+        </div>
+
+        <!-- RSVP Section -->
+        <div class="section" id="rsvp">
+            <div class="content-wrapper">
+                <h2 class="section-title">Konfirmasi Kehadiran</h2>
+                
+                <img src="images/image.png" alt="RSVP" class="romantic-photo">
+                
+                <p class="content-text">
+                    Mohon konfirmasi kehadiran Anda dengan mengisi form berikut:
+                </p>
+                
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="attendance">Konfirmasi Kehadiran</label>
+                        <select id="attendance" required>
+                            <option value="">Pilih Opsi</option>
+                            <option value="yes">Ya, saya akan hadir</option>
+                            <option value="no">Maaf, tidak dapat hadir</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Pesan/Ucapan</label>
+                        <textarea id="message" rows="4" placeholder="Tuliskan pesan atau doa untuk mempelai..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Kirim Konfirmasi</button>
+                </form>
+                
+                <div class="guest-book" id="guestBook">
+                    <h3 style="margin: 30px 0 15px; color: #ffd700;">Ucapan Tamu</h3>
+                    <div id="guestEntries">
+                        <!-- Guest entries will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing Section -->
+        <div class="section" id="closing">
+            <div class="content-wrapper">
+                <h2 class="section-title">Penutup</h2>
+                
+                <img src="images/image.png" alt="Thank You" class="romantic-photo">
+                
+                <div class="verse">
+                    "Kasih itu sabar; kasih itu murah hati; ia tidak cemburu. Ia tidak memegahkan diri dan tidak sombong. Ia tidak melakukan yang tidak sopan dan tidak mencari keuntungan diri sendiri. Ia tidak pemarah dan tidak menyimpan kesalahan orang lain."<br>
+                    <strong>(1 Korintus 13:4-5)</strong>
+                </div>
+                
+                <p class="content-text">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami<br>
+                    apabila Bapak/Ibu/Saudara/i berkenan hadir<br>
+                    untuk memberikan doa restu.
+                </p>
+
+                <div class="photo-gallery">
+                    <img src="images/andre.jpg" alt="Final 1" class="gallery-item">
+                    <img src="images/nita3.jpg" alt="Final 2" class="gallery-item">
+                    <img src="images/wedding.png" alt="Final 3" class="gallery-item">
+                </div>
+                
+                <h3 style="color: #ffd700; margin-top: 40px;">Kami yang berbahagia,</h3>
+                <h2 style="color: #ffd700; margin: 20px 0; font-family: 'Cinzel', serif;">Keluarga Besar<br>Andre & Trinita</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="prevSection()" id="prevBtn">← Sebelumnya</button>
+        <button class="nav-btn" onclick="nextSection()" id="nextBtn">Selanjutnya →</button>
+    </div>
+
+    <audio id="weddingMusic" loop>
+        <source src="audios/allofme.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.section');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const audio = document.getElementById('weddingMusic');
+        const progressBar = document.getElementById('progressBar');
+        let isMusicPlaying = false;
+
+        // Generate QR Code
+        function generateQRCode() {
+            const qrElement = document.getElementById('qrcode');
+            QRCode.toCanvas(qrElement, 'https://link.dana.id/awikwok', {
+                width: 200,
+                margin: 1,
+                color: {
+                    dark: '#000000',
+                    light: '#FFFFFF'
+                }
+            }, function(error) {
+                if (error) console.error(error);
+                console.log('QR Code generated successfully!');
+            });
+        }
+
+        // Create floating elements
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const symbols = ['❦', '✝', '✞', '✟', '♱', '♰', '✠', '✤', '✦'];
+            
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                element.style.left = Math.random() * 100 + 'vw';
+                element.style.top = Math.random() * 100 + 'vh';
+                element.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                element.style.animationDelay = Math.random() * 10 + 's';
+                element.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(element);
+            }
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const weddingDate = new Date('August 24, 2024 08:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerHTML = days;
+            document.getElementById('hours').innerHTML = hours;
+            document.getElementById('minutes').innerHTML = minutes;
+            document.getElementById('seconds').innerHTML = seconds;
+            
+            if (timeLeft < 0) {
+                document.getElementById('countdown').innerHTML = "<h3>Acara telah berlangsung!</h3>";
+            }
+        }
+
+        // Open invitation
+        function openInvitation() {
+            document.getElementById('cover').style.display = 'none';
+            sections[0].classList.add('active');
+            currentSection = 0;
+            updateNavigation();
+            updateProgressBar();
+            
+            // Auto play music (with user interaction)
+            audio.play().then(() => {
+                isMusicPlaying = true;
+            }).catch(error => {
+                console.log('Auto-play prevented:', error);
+            });
+        }
+
+        // Navigation functions with smooth transitions
+        function nextSection() {
+            if (currentSection < sections.length - 1) {
+                // Add transition animation
+                sections[currentSection].classList.add('section-transition');
+                
+                setTimeout(() => {
+                    sections[currentSection].classList.remove('active');
+                    sections[currentSection].classList.remove('section-transition');
+                    currentSection++;
+                    sections[currentSection].classList.add('active');
+                    updateNavigation();
+                    updateProgressBar();
+                    
+                    // Scroll to top of section for better experience
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 600);
+            }
+        }
+
+        function prevSection() {
+            if (currentSection > 0) {
+                // Add transition animation
+                sections[currentSection].classList.add('section-transition');
+                
+                setTimeout(() => {
+                    sections[currentSection].classList.remove('active');
+                    sections[currentSection].classList.remove('section-transition');
+                    currentSection--;
+                    sections[currentSection].classList.add('active');
+                    updateNavigation();
+                    updateProgressBar();
+                    
+                    // Scroll to top of section for better experience
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 600);
+            }
+        }
+
+        function updateNavigation() {
+            prevBtn.disabled = currentSection === 0;
+            nextBtn.disabled = currentSection === sections.length - 1;
+        }
+
+        function updateProgressBar() {
+            const progress = (currentSection / (sections.length - 1)) * 100;
+            progressBar.style.width = progress + '%';
+        }
+
+        // Music control
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+            } else {
+                audio.play();
+                isMusicPlaying = true;
+            }
+        }
+
+        // RSVP Form Submission
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const attendance = document.getElementById('attendance').value;
+            const message = document.getElementById('message').value;
+            
+            if (name && attendance) {
+                // Add guest entry with animation
+                const guestEntries = document.getElementById('guestEntries');
+                const entry = document.createElement('div');
+                entry.className = 'guest-entry';
+                entry.innerHTML = `
+                    <div class="guest-name">${name}</div>
+                    <div class="guest-message">${message || 'Mengucapkan selamat dan doa restu'}</div>
+                `;
+                guestEntries.appendChild(entry);
+                
+                // Reset form
+                this.reset();
+                
+                // Show success message with animation
+                const successMsg = document.createElement('div');
+                successMsg.textContent = 'Terima kasih! Konfirmasi kehadiran Anda telah berhasil dikirim.';
+                successMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(139, 0, 0, 0.9);
+                    color: #ffd700;
+                    padding: 20px 30px;
+                    border-radius: 10px;
+                    z-index: 1000;
+                    animation: fadeInOut 2s ease-in-out;
+                    border: 1px solid rgba(255, 215, 0, 0.3);
+                `;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    document.body.removeChild(successMsg);
+                }, 2000);
+            }
+        });
+
+        // Initialize when page loads
+        window.onload = function() {
+            generateQRCode();
+            updateNavigation();
+            createFloatingElements();
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+            
+            // Add CSS for success message animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+        };
+
+        // Swipe support for mobile with smooth transitions
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSection(); // Swipe left
+                } else {
+                    prevSection(); // Swipe right
+                }
+            }
+        }
+
+        // Keyboard navigation with smooth transitions
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSection();
+            } else if (e.key === 'ArrowRight') {
+                nextSection();
+            }
+        });
+    </script>
+</body>
+</html>
