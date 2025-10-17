@@ -22,6 +22,8 @@
             overflow-x: hidden;
             /* Prevent scroll bounce on iOS */
             -webkit-overflow-scrolling: touch;
+            /* Prevent pull-to-refresh */
+            overscroll-behavior-y: none;
         }
 
         .container {
@@ -33,6 +35,8 @@
             height: 100vh;
             overflow-y: auto;
             scroll-behavior: smooth;
+            /* Prevent bounce on iOS */
+            -webkit-overflow-scrolling: auto;
         }
 
         /* Cover Section */
@@ -156,7 +160,8 @@
             padding: 50px 25px;
             background-size: cover !important;
             background-position: center !important;
-            background-attachment: fixed !important;
+            /* Remove fixed attachment for mobile compatibility */
+            background-attachment: scroll !important;
         }
 
         .section.active {
@@ -1542,7 +1547,7 @@
     </audio>
 
     <script>
-        // Simple and stable navigation system
+        // Improved navigation system with better mobile support
         let currentSection = 0;
         const sections = document.querySelectorAll('.section');
         const prevBtn = document.getElementById('prevBtn');
@@ -1551,6 +1556,7 @@
         const progressBar = document.getElementById('progressBar');
         const container = document.getElementById('mainContainer');
         let isMusicPlaying = false;
+        let isTransitioning = false; // Prevent multiple transitions
 
         // Generate QR Code
         function generateQRCode() {
@@ -1624,8 +1630,12 @@
             });
         }
 
-        // Show specific section
+        // Show specific section with improved transition handling
         function showSection(index) {
+            if (isTransitioning) return;
+            
+            isTransitioning = true;
+            
             // Hide all sections
             sections.forEach(section => {
                 section.classList.remove('active');
@@ -1645,17 +1655,22 @@
             
             updateNavigation();
             updateProgressBar();
+            
+            // Reset transition lock after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800);
         }
 
-        // Navigation functions
+        // Navigation functions with improved handling
         function nextSection() {
-            if (currentSection < sections.length - 1) {
+            if (currentSection < sections.length - 1 && !isTransitioning) {
                 showSection(currentSection + 1);
             }
         }
 
         function prevSection() {
-            if (currentSection > 0) {
+            if (currentSection > 0 && !isTransitioning) {
                 showSection(currentSection - 1);
             }
         }
@@ -1744,31 +1759,45 @@
             }
         });
 
-        // Touch swipe support for mobile
+        // Improved touch swipe support for mobile
         let touchStartY = 0;
         let touchEndY = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         container.addEventListener('touchstart', e => {
             touchStartY = e.changedTouches[0].screenY;
+            touchStartX = e.changedTouches[0].screenX;
         });
 
         container.addEventListener('touchend', e => {
             touchEndY = e.changedTouches[0].screenY;
+            touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
 
         function handleSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartY - touchEndY;
+            const diffY = touchStartY - touchEndY;
+            const diffX = touchStartX - touchEndX;
 
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextSection(); // Swipe up
+            // Only process horizontal swipes with minimal vertical movement
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > swipeThreshold) {
+                if (diffX > 0) {
+                    nextSection(); // Swipe left
                 } else {
-                    prevSection(); // Swipe down
+                    prevSection(); // Swipe right
                 }
             }
         }
+
+        // Prevent default touch behaviors that might interfere
+        document.addEventListener('touchmove', function(e) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                return; // Allow scrolling in form elements
+            }
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
