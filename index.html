@@ -160,18 +160,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            animation: sectionFadeIn 1.5s ease-out;
-        }
-
-        @keyframes sectionFadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(50px) scale(0.95);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
         }
 
         /* BACKGROUND FULLSCREEN DENGAN TEMA KRISTEN BATAK MEWAH */
@@ -252,18 +240,6 @@
             position: relative;
             z-index: 2;
             border: 1px solid rgba(255, 215, 0, 0.2);
-            animation: contentFloat 2s ease-out;
-        }
-
-        @keyframes contentFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(80px) scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
         }
 
         .content-wrapper::before {
@@ -565,7 +541,7 @@
             height: 3px;
             background: linear-gradient(90deg, #8B0000, #ffd700, #003366);
             z-index: 1000;
-            transition: width 0.6s ease;
+            transition: width 0.3s ease;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
@@ -626,12 +602,6 @@
             width: 80px;
             height: 3px;
             background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            animation: lineExtend 1.5s ease-out 0.5s both;
-        }
-
-        @keyframes lineExtend {
-            from { width: 0; opacity: 0; }
-            to { width: 80px; opacity: 1; }
         }
 
         /* Countdown */
@@ -992,26 +962,6 @@
             backdrop-filter: blur(10px);
         }
 
-        /* Section Transition Animation */
-        .section-transition {
-            animation: sectionChange 1.5s ease-in-out;
-        }
-
-        @keyframes sectionChange {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         /* Responsive Design */
         @media (max-width: 480px) {
             .container {
@@ -1358,6 +1308,7 @@
     </audio>
 
     <script>
+        // Simple and stable navigation system
         let currentSection = 0;
         const sections = document.querySelectorAll('.section');
         const prevBtn = document.getElementById('prevBtn');
@@ -1369,17 +1320,19 @@
         // Generate QR Code
         function generateQRCode() {
             const qrElement = document.getElementById('qrcode');
-            QRCode.toCanvas(qrElement, 'https://link.dana.id/awikwok', {
-                width: 200,
-                margin: 1,
-                color: {
-                    dark: '#000000',
-                    light: '#FFFFFF'
-                }
-            }, function(error) {
-                if (error) console.error(error);
-                console.log('QR Code generated successfully!');
-            });
+            if (qrElement) {
+                QRCode.toCanvas(qrElement, 'https://link.dana.id/awikwok', {
+                    width: 200,
+                    margin: 1,
+                    color: {
+                        dark: '#000000',
+                        light: '#FFFFFF'
+                    }
+                }, function(error) {
+                    if (error) console.error(error);
+                    console.log('QR Code generated successfully!');
+                });
+            }
         }
 
         // Create floating elements
@@ -1424,8 +1377,7 @@
         // Open invitation
         function openInvitation() {
             document.getElementById('cover').style.display = 'none';
-            sections[0].classList.add('active');
-            currentSection = 0;
+            showSection(0);
             updateNavigation();
             updateProgressBar();
             
@@ -1437,42 +1389,31 @@
             });
         }
 
-        // Navigation functions with smooth transitions
+        // Show specific section
+        function showSection(index) {
+            // Hide all sections
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            sections[index].classList.add('active');
+            currentSection = index;
+            
+            updateNavigation();
+            updateProgressBar();
+        }
+
+        // Navigation functions
         function nextSection() {
             if (currentSection < sections.length - 1) {
-                // Add transition animation
-                sections[currentSection].classList.add('section-transition');
-                
-                setTimeout(() => {
-                    sections[currentSection].classList.remove('active');
-                    sections[currentSection].classList.remove('section-transition');
-                    currentSection++;
-                    sections[currentSection].classList.add('active');
-                    updateNavigation();
-                    updateProgressBar();
-                    
-                    // Scroll to top of section for better experience
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 600);
+                showSection(currentSection + 1);
             }
         }
 
         function prevSection() {
             if (currentSection > 0) {
-                // Add transition animation
-                sections[currentSection].classList.add('section-transition');
-                
-                setTimeout(() => {
-                    sections[currentSection].classList.remove('active');
-                    sections[currentSection].classList.remove('section-transition');
-                    currentSection--;
-                    sections[currentSection].classList.add('active');
-                    updateNavigation();
-                    updateProgressBar();
-                    
-                    // Scroll to top of section for better experience
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 600);
+                showSection(currentSection - 1);
             }
         }
 
@@ -1519,7 +1460,7 @@
                 // Reset form
                 this.reset();
                 
-                // Show success message with animation
+                // Show success message
                 const successMsg = document.createElement('div');
                 successMsg.textContent = 'Terima kasih! Konfirmasi kehadiran Anda telah berhasil dikirim.';
                 successMsg.style.cssText = `
@@ -1532,7 +1473,6 @@
                     padding: 20px 30px;
                     border-radius: 10px;
                     z-index: 1000;
-                    animation: fadeInOut 2s ease-in-out;
                     border: 1px solid rgba(255, 215, 0, 0.3);
                 `;
                 document.body.appendChild(successMsg);
@@ -1550,45 +1490,9 @@
             createFloatingElements();
             setInterval(updateCountdown, 1000);
             updateCountdown();
-            
-            // Add CSS for success message animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeInOut {
-                    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-                }
-            `;
-            document.head.appendChild(style);
         };
 
-        // Swipe support for mobile with smooth transitions
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextSection(); // Swipe left
-                } else {
-                    prevSection(); // Swipe right
-                }
-            }
-        }
-
-        // Keyboard navigation with smooth transitions
+        // Simple keyboard navigation
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
                 prevSection();
